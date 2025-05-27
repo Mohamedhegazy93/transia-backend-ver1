@@ -13,7 +13,7 @@ app.use(cookieParser());
 app.use(express.json());
 dotenv.config();
 
-app.get('/',(req,res)=>{
+app.get('/main',(req,res)=>{
 	res.end('hello world')
 })
 
