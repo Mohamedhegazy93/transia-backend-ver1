@@ -13,8 +13,8 @@ app.use(cookieParser());
 app.use(express.json());
 dotenv.config();
 
-app.get('',(req,res)=>{
-	res.write('hello world')
+app.get('/',(req,res)=>{
+	res.end('hello world')
 })
 
 app.use("/api/v1/auth",authRoutes);
