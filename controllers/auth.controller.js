@@ -38,10 +38,10 @@ export const register = async (req, res,next) => {
 	const { phoneNumber,password} = req.body;
 
     const userExists = await User.findOne({ phoneNumber });
-    if(req.body.role){
-      return next(new ApiError("لا تستطيع تحديد دورك", 401));
+    // if(req.body.role){
+    //   return next(new ApiError("لا تستطيع تحديد دورك", 401));
 
-    }
+    // }
     if (userExists&&(await userExists.comparePassword(password))) {
       const { accessToken, refreshToken } = generateTokens(userExists._id);
       userExists.refreshToken=refreshToken

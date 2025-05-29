@@ -6,15 +6,46 @@ import ApiError from "./utils/apiError.js";
 import cookieParser from 'cookie-parser';
 import authRoutes from "./routes/auth.route.js"; 
 import userRoutes from "./routes/user.route.js"; 
+import helmet from "helmet"
+import rateLimit from "express-rate-limit"; 
+import cors from "cors";
+import morgan from 'morgan'
+
 
 
 const app = express();
 app.use(cookieParser());
+app.use(helmet());
+app.use(cors({
+    origin: '*', // لو هتشتغل في Production، لازم تحدد الـ Domains المسموح بيها
+	//origin: 'https://yourfrontenddomain.com',
+
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // للسماح بإرسال الـ Cookies مع الـ Requests
+    optionsSuccessStatus: 204
+}));
 app.use(express.json());
 dotenv.config();
 
-app.get('/main',(req,res)=>{
+const limiter = rateLimit({
+    windowMs: 1 * 60 * 1000, // 15 دقيقة
+    max: 15, // 15 طلب كحد أقصى لكل IP خلال الـ 1 دقيقة
+    message: "Too many requests from this IP, please try again after 15 minutes!"
+});
+
+// تطبيق الـ Rate Limiter على كل الـ APIs
+app.use(limiter);
+
+// في الـ Development فقط
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev')); // morgan لأغراض الـ logging
+}
+
+app.get('/',(req,res)=>{
 	res.end('hello world')
+})
+app.get('/main',(req,res)=>{
+	res.end('main')
 })
 
 app.use("/api/v1/auth",authRoutes);

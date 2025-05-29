@@ -44,7 +44,7 @@ export const protectedRoute = async (req, res, next) => {
         return next(new ApiError("غير مسموح لك بالوصول الي هذا الرابط(admins only)", 401));
       }
     }
-  
+
   
     next();
   };
