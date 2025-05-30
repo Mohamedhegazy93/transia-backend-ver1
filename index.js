@@ -29,8 +29,8 @@ dotenv.config();
 
 const limiter = rateLimit({
     windowMs: 1 * 60 * 1000, // 15 دقيقة
-    max: 15, // 15 طلب كحد أقصى لكل IP خلال الـ 1 دقيقة
-    message: "Too many requests from this IP, please try again after 15 minutes!"
+    max: 30, // 15 طلب كحد أقصى لكل IP خلال الـ 1 دقيقة
+    message: "Too many requests from this IP, please try again after 1 minute!"
 });
 
 // تطبيق الـ Rate Limiter على كل الـ APIs
