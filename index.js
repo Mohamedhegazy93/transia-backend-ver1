@@ -11,7 +11,7 @@ import rateLimit from "express-rate-limit";
 import cors from "cors";
 import morgan from 'morgan'
 
-
+connectDB()
 
 const app = express();
 app.use(cookieParser());
@@ -61,7 +61,7 @@ app.use(globalError);
 const PORT=process.env.PORT
 const server=app.listen(PORT, () => {
 	console.log("Server is running on http://localhost:" + PORT);
-	connectDB()
+	
 	
 });
 process.on('unhandledRejection', (err) => {
