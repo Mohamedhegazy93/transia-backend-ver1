@@ -42,11 +42,9 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.get('/',(req,res)=>{
-	res.end('hello world')
+	res.end('hello')
 })
-app.get('/main',(req,res)=>{
-	res.end('main')
-})
+
 
 app.use("/api/v1/auth",authRoutes);
 app.use("/api/v1/users",userRoutes);
