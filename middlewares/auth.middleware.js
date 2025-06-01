@@ -5,7 +5,7 @@ import User from "../models/user.model.js";
 import ApiError from "../utils/apiError.js";
 
 export const protectedRoute = async (req, res, next) => {
-  try {
+ 
     const token = req.cookies.accessToken;
     if (!token) {
       return next(new ApiError("لا يمكنك تنفيذ هذا الطلب", 404));
@@ -20,10 +20,8 @@ export const protectedRoute = async (req, res, next) => {
     if (!user) {
       return next(new ApiError("لا يمكنك تنفيذ هذا الطلب", 401));
     }
-  } catch (error) {
-    console.log(error);
-    return res.json({ message: error.message });
-  }
+  
+  
   next();
 };
 

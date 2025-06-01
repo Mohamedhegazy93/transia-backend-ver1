@@ -17,11 +17,11 @@ const app = express();
 app.use(cookieParser());
 app.use(helmet());
 app.use(cors({
-    origin: '*', // لو هتشتغل في Production، لازم تحدد الـ Domains المسموح بيها
+    origin: 'http://localhost:3000', // لو هتشتغل في Production، لازم تحدد الـ Domains المسموح بيها
 	//origin: 'https://yourfrontenddomain.com',
 
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true, // للسماح بإرسال الـ Cookies مع الـ Requests
+    credentials: true, 
     optionsSuccessStatus: 204
 }));
 app.use(express.json());
