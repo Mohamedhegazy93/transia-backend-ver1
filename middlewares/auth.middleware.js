@@ -8,11 +8,11 @@ export const protectedRoute = async (req, res, next) => {
  
     const token = req.cookies.accessToken;
     if (!token) {
-      return next(new ApiError("لا يمكنك تنفيذ هذا الطلب", 404));
+      return next(new ApiError("لا يمكنك تنفيذ هذا الطلب", 401));
     }
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     if (!decoded) {
-      return next(new ApiError("لا يمكنك تنفيذ هذا الطلب", 404));
+      return next(new ApiError("لا يمكنك تنفيذ هذا الطلب", 401));
     }
     req.user = decoded;
 

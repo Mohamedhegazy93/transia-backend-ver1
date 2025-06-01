@@ -10,6 +10,8 @@ import helmet from "helmet"
 import rateLimit from "express-rate-limit"; 
 import cors from "cors";
 import morgan from 'morgan'
+dotenv.config();
+
 
 connectDB()
 
@@ -18,14 +20,13 @@ app.use(cookieParser());
 app.use(helmet());
 app.use(cors({
     origin: 'http://localhost:3000', // لو هتشتغل في Production، لازم تحدد الـ Domains المسموح بيها
-	//origin: 'https://yourfrontenddomain.com',
+	origin: '*',
 
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, 
     optionsSuccessStatus: 204
 }));
 app.use(express.json());
-dotenv.config();
 
 const limiter = rateLimit({
     windowMs: 1 * 60 * 1000, // 15 دقيقة
