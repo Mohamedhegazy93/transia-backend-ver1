@@ -60,6 +60,8 @@ export const register = async (req, res, next) => {
     return res.status(201).json({
       message: "تم التسجيل مرة اخري بنجاح",
       role: userExists.role,
+      accessToken,
+      refreshToken
     });
   }
   const user = await User.create(req.body);
